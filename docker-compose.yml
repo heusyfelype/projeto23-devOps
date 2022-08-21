@@ -1,0 +1,43 @@
+services:
+  db_sortedor_estudantes:
+    image: postgres
+    container_name: db_sortedor_estudantes
+    restart: always
+    ports:
+      -2345:5432
+    env_file:
+      - back-end/.env
+    volumes:
+      sorteador_volume_db: /var/lib/postgresql/data
+
+  node_sorteador_estudantes:
+    container_name: node_sorteador_estudantes
+    build: ./back-end
+    ports: 
+      - 5000:5000
+    depends_on:
+      - db_sortedor_estudantes
+    env_file:
+      - back-end/.env
+    
+  react_sorteador_estudantes:
+    container_name: react_sorteador_estudantes
+    build: ./front-end
+    volumes: 
+      - sorteador_volume_nginx: /var/www/html
+  
+  nginx_sorteador_estudantes:
+    container_name: nginx_sorteador_estudantes
+    build: ./nginx
+    ports:
+      - 80:80
+    volumes:
+      - sorteador_volume_nginx: /var/www/html
+    depends_on:
+      - db_sortedor_estudantes
+      - node_sorteador_estudantes
+      - react_sorteador_estudantes
+
+volumes:
+  sorteador_volume_db:
+  sorteador_volume_nginx:
