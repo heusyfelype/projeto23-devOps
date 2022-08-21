@@ -4,11 +4,11 @@ services:
     container_name: db_sortedor_estudantes
     restart: always
     ports:
-      -2345:5432
+      - 2345:5432
     env_file:
       - back-end/.env
     volumes:
-      sorteador_volume_db: /var/lib/postgresql/data
+      - sorteador_volume_db: /var/lib/postgresql/data
 
   node_sorteador_estudantes:
     container_name: node_sorteador_estudantes
