@@ -8,7 +8,7 @@ services:
     env_file:
       - back-end/.env
     volumes:
-      - sorteador_volume_db: /var/lib/postgresql/data
+      - sorteador_volume_db:/var/lib/postgresql/data
 
   node_sorteador_estudantes:
     container_name: node_sorteador_estudantes
@@ -24,7 +24,7 @@ services:
     container_name: react_sorteador_estudantes
     build: ./front-end
     volumes: 
-      - sorteador_volume_nginx: /var/www/html
+      - sorteador_volume_nginx:/var/www/html
   
   nginx_sorteador_estudantes:
     container_name: nginx_sorteador_estudantes
@@ -32,7 +32,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - sorteador_volume_nginx: /var/www/html
+      - sorteador_volume_nginx:/var/www/html
     depends_on:
       - db_sortedor_estudantes
       - node_sorteador_estudantes
