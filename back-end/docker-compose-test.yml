@@ -10,7 +10,7 @@ services:
 
   node_sorteador_estudantes:
     container_name: node_sorteador_estudantes
-    build: ./back-end
+    build: .
     ports: 
       - 5000:5000
     depends_on:
