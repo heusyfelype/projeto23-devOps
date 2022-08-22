@@ -6,14 +6,14 @@ services:
     ports:
       - 5001:5432
     env_file:
-      - back-end/.env.test
+      - .env.test
 
   node_sorteador_estudantes:
     container_name: node_sorteador_estudantes
-    build: ./back-end
+    build: .
     ports: 
       - 5000:5000
     depends_on:
       - db_sortedor_estudantes
     env_file:
-      - back-end/.env.test
+      - .env.test
